@@ -12,7 +12,7 @@
 
 
 //file-name: generalize.js
-class generalize {
+export default class generalize {
     constructor() {
         this.availableItems = [{"name":"parentheses", "characters":"()"}, {"name":"brackets", "characters":"[]"}, {"name":"brace", "characters":"{}"}]
         this.openCharacters = []
