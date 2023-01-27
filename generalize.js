@@ -1,7 +1,7 @@
 //file-name: generalize.js
 class generalize {
     constructor() {
-        this.availableItems = ['{}','[]','()']
+        this.availableItems = [{"name":"parentheses", "characters":"()"}, {"name":"brackets", "characters":"[]"}, {"name":"brace", "characters":"{}"}]
         this.openCharacters = []
         this.closeCharacters = []
         this.init()
@@ -9,19 +9,24 @@ class generalize {
 
     isBalance(str) {
         const arrayOfCharacters = [...str]
-        const nonCloseItems = []
+        let nonCloseItems = []
 
         arrayOfCharacters.forEach((char) => {
-            const isCharacterExistInOpen = this.isCharacterExist('openCharacters', char)
-            const isCharacterExistInClose = this.isCharacterExist('closeCharacters', char)
+            const openCharacterData = this.isCharacterExist('openCharacters', char)
+            const closeCharacterData = this.isCharacterExist('closeCharacters', char)
 
-            if (isCharacterExistInOpen) {
-                nonCloseItems.push(char)
+            if (openCharacterData.isExist) {
+                nonCloseItems.push(openCharacterData)
             }
 
-            else if (isCharacterExistInClose) {
-                if (this.openCharacters[nonCloseItems.pop()] !== char){
-                    return false;
+            else if (closeCharacterData.isExist) {
+                const { category } = closeCharacterData
+                const lastNonCloseItem = nonCloseItems[nonCloseItems.length - 1]
+
+                if (lastNonCloseItem && lastNonCloseItem.category ==  category) {
+                    nonCloseItems.pop()
+                } else {
+                    nonCloseItems.push("@")
                 }
             }
         })
@@ -29,27 +34,55 @@ class generalize {
         return nonCloseItems.length ? false : true
     }
 
-    isCharacterExist(searchIn, characterForSearch) {
-        let isCharacterExist;
+    isCharacterExist (searchIn, searchableCharacter) {
+        let response = {};
 
         if (searchIn == "openCharacters") {
-            console.log('isCharacterExist => opens')
-            isCharacterExist = (this.openCharacters.indexOf(characterForSearch) > -1) ? true : false
-        } else if (searchIn == "closeCharacters") {
-            console.log('isCharacterExist => closes')
-            isCharacterExist = (this.closeCharacters.indexOf(characterForSearch) > -1) ? true : false
+            this.openCharacters.forEach((obj) => {
+                const { character, name } = obj
+
+                if (searchableCharacter == character) {
+                    response.isExist = true
+                    response.category = name
+                    response.openCharacter = character
+
+                    return false
+                }
+            })
         }
 
-        return isCharacterExist;
+        else if (searchIn == "closeCharacters") {
+            this.closeCharacters.forEach((obj) => {
+                const { character, name } = obj
+
+                if (searchableCharacter == character) {
+                    response.isExist = true
+                    response.category = name
+                    response.closeCharacter = character
+
+                    return false
+                }
+            })
+        }
+
+        return response;
     }
 
     init() {
         this.availableItems.forEach((item) => {
-            const openCharacter = item.slice(0,1)
-            const closeCharacter = item.slice(1,2)
+            const openCharacterObj = {}
+            const closeCharacterObj = {}
 
-            this.openCharacters.push(openCharacter)
-            this.closeCharacters.push(closeCharacter)
+            openCharacterObj.name = item.name
+            openCharacterObj.character = item.characters.slice(0,1)
+
+            closeCharacterObj.name = item.name
+            closeCharacterObj.character = item.characters.slice(1,2)
+
+            this.openCharacters.push(openCharacterObj)
+            this.closeCharacters.push(closeCharacterObj)
         })
     }
+
 }
+
