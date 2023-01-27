@@ -7,6 +7,27 @@ class generalize {
         this.init()
     }
 
+    isBalance(str) {
+        const arrayOfCharacters = [...str]
+        const nonCloseItems = []
+
+        arrayOfCharacters.forEach((char) => {
+            const isCharacterExistInOpen = this.isCharacterExist('openCharacters', char)
+            const isCharacterExistInClose = this.isCharacterExist('closeCharacters', char)
+
+            if (isCharacterExistInOpen) {
+                nonCloseItems.push(char)
+            }
+
+            else if (isCharacterExistInClose) {
+                if (this.openCharacters[nonCloseItems.pop()] !== char){
+                    return false;
+                }
+            }
+        })
+
+        return nonCloseItems.length ? false : true
+    }
 
     isCharacterExist(searchIn, characterForSearch) {
         let isCharacterExist;
@@ -32,4 +53,3 @@ class generalize {
         })
     }
 }
-
