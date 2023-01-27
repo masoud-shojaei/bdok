@@ -1,3 +1,16 @@
+/*
+|--------------------------------------------------------------------------
+| Usage
+|--------------------------------------------------------------------------
+|
+| Create new instance of generalize, then invoke isBalance method.
+| ex:
+|   const generalizeInstance = new generalize()
+|   const result = generalizeInstance.isBalance("({[]})")
+|   console.log(result)
+*/
+
+
 //file-name: generalize.js
 class generalize {
     constructor() {
@@ -84,4 +97,3 @@ class generalize {
         })
     }
 }
-
