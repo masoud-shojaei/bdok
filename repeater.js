@@ -1,72 +1,69 @@
 //file-name: repeater
  class repeater {
     constructor() {
-        this.repeatCount = []
+        this.repetitionsList = []
         this.init()
     }
 
-    init() {
-        for (let i = 1; i <= 9; i++) {
-            let obj = {}
+    getRepetitionObj(numbers) {
+         let finalResult = {}
+         const arrayOfNumbers = [...String(numbers)]
 
-            obj.number = i
-            obj.repetitions = 0
-            this.repeatCount.push(obj)
-        }
-    }
+         arrayOfNumbers.forEach((number) => {
+             const repetitionOfCurrentNumber = this.getRepetitionCount(number)
 
-    getRepeatedInfo(number) {
-        let responseObj = {}
-        let convertToString = String(number)
-        const arrayOfNumbers = [...convertToString]
+             if (repetitionOfCurrentNumber >= 1) {
+                 finalResult[number] = this.numbersRepetitionHandler(number, repetitionOfCurrentNumber)
 
-        arrayOfNumbers.forEach((number) => {
-            let shouldRepeat = this.getRepetionCount(number)
+                 return false
+             }
 
-            if (shouldRepeat >= 1) {
-                responseObj[number] = this.numberRepeater(number, shouldRepeat)
+             finalResult[number] = this.numbersRepetitionHandler(number)
+         })
 
-                return false
-            }
+         return finalResult
+     }
 
-            responseObj[number] = this.numberRepeater(number)
-        })
+    numbersRepetitionHandler(currentNumber, additionalRepetition) {
+         const baseNumber = String(currentNumber)
+         let loopLength = Number(currentNumber)
+         let result = baseNumber
 
-        return responseObj
-    }
+         if (additionalRepetition) {
+             for (let i = 0; i < additionalRepetition; i++) {
+                 loopLength += Number(currentNumber)
+             }
+         }
 
-     setRepetionCount(number) {
-         this.repeatCount.forEach((item) => {
-             if (item.number == number) {
+         for (let i = 0; i < loopLength - 1; i++) {
+             result += baseNumber
+         }
+
+         this.setRepetitionCount(currentNumber)
+         return result
+     }
+
+    setRepetitionCount(currentNumber) {
+         this.repetitionsList.forEach((item) => {
+             if (item.number == currentNumber) {
                  item.repetitions++
              }
          })
      }
 
-     getRepetionCount(number) {
-         const findedItem = this.repeatCount.find((item) => item.number == number)
-         return findedItem.repetitions
+    getRepetitionCount(currentNumber) {
+         const targetItem = this.repetitionsList.find((item) => item.number == currentNumber)
+
+         return targetItem.repetitions
      }
 
-    numberRepeater(number, shoudRepeat) {
-        const baseRepeat = String(number)
-        let count = Number(number)
-        let res = baseRepeat
+    init() {
+         for (let i = 1; i <= 9; i++) {
+             let obj = {}
 
-        if (shoudRepeat) {
-            for (let i = 0; i < shoudRepeat; i++) {
-                count += Number(number)
-            }
-        }
-
-        for (let i = 0; i < count - 1; i++) {
-            res += number
-        }
-
-        this.setRepetionCount(number)
-        return res
-    }
+             obj.number = i
+             obj.repetitions = 0
+             this.repetitionsList.push(obj)
+         }
+     }
 }
-
-const test = new repeater()
-console.log('finila obj', test.getRepeatedInfo(123444))
