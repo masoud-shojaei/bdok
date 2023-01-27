@@ -12,7 +12,7 @@
 
 
 //file-name: encoder.js
- class encoder{
+ export default class encoder{
     constructor() {
         this.alphabet = "abcdefghijklmnopqrstuvwxyz"
     }
