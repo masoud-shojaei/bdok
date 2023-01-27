@@ -12,8 +12,8 @@ class generalize {
         let nonCloseItems = []
 
         arrayOfCharacters.forEach((char) => {
-            const openCharacterData = this.isCharacterExist('openCharacters', char)
-            const closeCharacterData = this.isCharacterExist('closeCharacters', char)
+            const openCharacterData = this.dataExtractor('openCharacters', char)
+            const closeCharacterData = this.dataExtractor('closeCharacters', char)
 
             if (openCharacterData.isExist) {
                 nonCloseItems.push(openCharacterData)
@@ -34,17 +34,17 @@ class generalize {
         return nonCloseItems.length ? false : true
     }
 
-    isCharacterExist (searchIn, searchableCharacter) {
-        let response = {};
+    dataExtractor (searchIn, searchableCharacter) {
+        let data = {};
 
         if (searchIn == "openCharacters") {
             this.openCharacters.forEach((obj) => {
                 const { character, name } = obj
 
                 if (searchableCharacter == character) {
-                    response.isExist = true
-                    response.category = name
-                    response.openCharacter = character
+                    data.isExist = true
+                    data.category = name
+                    data.openCharacter = character
 
                     return false
                 }
@@ -56,16 +56,16 @@ class generalize {
                 const { character, name } = obj
 
                 if (searchableCharacter == character) {
-                    response.isExist = true
-                    response.category = name
-                    response.closeCharacter = character
+                    data.isExist = true
+                    data.category = name
+                    data.closeCharacter = character
 
                     return false
                 }
             })
         }
 
-        return response;
+        return data;
     }
 
     init() {
@@ -83,6 +83,5 @@ class generalize {
             this.closeCharacters.push(closeCharacterObj)
         })
     }
-
 }
 
