@@ -11,7 +11,7 @@
 */
 
 
-//file-name: repeater
+//file-name: repeater.js
  class repeater {
     constructor() {
         this.repetitionsList = []
