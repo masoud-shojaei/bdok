@@ -7,6 +7,21 @@ class generalize {
         this.init()
     }
 
+
+    isCharacterExist(searchIn, characterForSearch) {
+        let isCharacterExist;
+
+        if (searchIn == "openCharacters") {
+            console.log('isCharacterExist => opens')
+            isCharacterExist = (this.openCharacters.indexOf(characterForSearch) > -1) ? true : false
+        } else if (searchIn == "closeCharacters") {
+            console.log('isCharacterExist => closes')
+            isCharacterExist = (this.closeCharacters.indexOf(characterForSearch) > -1) ? true : false
+        }
+
+        return isCharacterExist;
+    }
+
     init() {
         this.availableItems.forEach((item) => {
             const openCharacter = item.slice(0,1)
@@ -17,3 +32,4 @@ class generalize {
         })
     }
 }
+
