@@ -12,7 +12,7 @@
 
 
 //file-name: repeater.js
- class repeater {
+ export default class repeater {
     constructor() {
         this.repetitionsList = []
         this.init()
