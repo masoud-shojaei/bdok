@@ -1,5 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Usage
+|--------------------------------------------------------------------------
+|
+| Create new instance of encoder, then invoke getEncode method.
+| ex:
+|   const encoderInstance = new encoder()
+|   const result = encoderInstance.getEncode("abz")
+|   console.log(result)
+*/
+
+
 //file-name: encoder.js
-export default class encoder{
+ class encoder{
     constructor() {
         this.alphabet = "abcdefghijklmnopqrstuvwxyz"
     }
