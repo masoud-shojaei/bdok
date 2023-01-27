@@ -1,3 +1,16 @@
+/*
+|--------------------------------------------------------------------------
+| Usage
+|--------------------------------------------------------------------------
+|
+| Create new instance of repeater, then invoke getRepetitionObj method.
+| ex:
+|   const repeaterInstance = new repeater()
+|   const result = repeaterInstance.getRepetitionObj("1234445")
+|   console.log(result)
+*/
+
+
 //file-name: repeater
  class repeater {
     constructor() {
