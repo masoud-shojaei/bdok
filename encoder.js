@@ -5,7 +5,16 @@ class  encoder{
     }
 
     getEncode(rawString, countOfEncode) {
+        const firstStepOfEncode = this.letterTransfer(rawString)
+        console.log("firstStepOfEncode", firstStepOfEncode)
+    }
 
+    letterTransfer(stringForTransfer) {
+        let arrayOfLetters = [...stringForTransfer]
+        const lastItem = arrayOfLetters.pop()
+
+        arrayOfLetters.unshift(lastItem)
+        return arrayOfLetters
     }
 }
 
