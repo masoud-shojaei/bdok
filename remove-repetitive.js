@@ -5,12 +5,12 @@
 |
 | Invoke RemoveRepetitive method, then pass the string
 | ex:
-|   RemoveRepetitive("aaaaaaaaaaaaaaabbbbbbbbbbbbzzzzzzzzzzzz")
+|   removeRepetitive("aaaaaaaaaaaaaaabbbbbbbbbbbbzzzzzzzzzzzz")
 */
 
 
 //file-name: remove-repetitive.js
-function RemoveRepetitive(str) {
+export  default function removeRepetitive(str) {
     let rawString = str
     let normalizeString = Array.from(new Set(rawString)).toString().replaceAll(",","");
 
