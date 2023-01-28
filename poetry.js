@@ -24,7 +24,17 @@ class Poetry {
         console.log(lastLetterOfInputPoem)
     }
 
+    convertArrayToString(arr) {
+        const str = arr.toString().replaceAll(",","")
 
+        return str
+    }
+
+    convertStringToArray(string) {
+        const arr = [...string]
+
+        return arr
+    }
 
     getLastIndexOfPoem(poem) {
         const preparePoet = this.getTrim(poem)
