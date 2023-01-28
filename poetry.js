@@ -18,4 +18,18 @@ class Poetry {
             "گفت تیری با کمان، روز نبرد - کاین ستمکاری تو کردی، کس نکرد",
         ]
     }
+
+    start(poem) {
+        const lastLetterOfInputPoem = this.getLastIndexOfPoem(poem)
+        console.log(lastLetterOfInputPoem)
+    }
+
+    getTrim(string) {
+        let finalString = string.trim()
+
+        return finalString
+    }
 }
+
+const test = new Poetry()
+test.start("   دختری خرد، شکایت سر کرد - که مرا حادثه بی مادر کرد   ")
