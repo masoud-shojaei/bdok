@@ -24,6 +24,17 @@ class Poetry {
         console.log(lastLetterOfInputPoem)
     }
 
+
+
+
+    getFirstIndexOfPoem(poem) {
+        const preparePoet = this.getTrim(poem)
+        const arrayOfLettrs = this.convertStringToArray(preparePoet)
+        const FirstLetterOfThePoem = arrayOfLettrs[0]
+
+        return FirstLetterOfThePoem
+    }
+
     getTrim(string) {
         let finalString = string.trim()
 
