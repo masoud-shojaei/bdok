@@ -1,6 +1,22 @@
-class Poetry {
+/*
+|--------------------------------------------------------------------------
+| Usage
+|--------------------------------------------------------------------------
+|
+| Create new instance of Poetry, then invoke start method.
+| pay attention that poem you insert should be separated by a hyphen(-)
+| ex:
+|   const poetryInstance = new Poetry()
+|   const poem = "بلبلی شیفته میگفت به گل - که جمال تو چراغ چمن است"
+|   const result = poetryInstance.start(poem)
+|   console.log(result)
+*/
+
+
+//file-name: poetry.js
+export default class Poetry {
     constructor() {
-        this.poets = [
+        this.poems = [
             "به لاله نرگس مخمور گفت وقت سحر - که هر که در صف باغ است صاحب هنریست",
             "ای خوشا مستانه سر در پای دلبر داشتن - دل تهی از خوب و زشت چرخ اخضر داشتن",
             "کبوتر بچه‌ای با شوق پرواز - بجرئت کرد روزی بال و پر باز",
@@ -20,8 +36,48 @@ class Poetry {
     }
 
     start(poem) {
-        const lastLetterOfInputPoem = this.getLastIndexOfPoem(poem)
-        console.log(lastLetterOfInputPoem)
+        let result
+        const { verseOne, verseTwo } = this.verseSeparator(poem)
+        const lastLetterOfInputPoemVerseOne = this.getLastIndexOfPoem(verseOne)
+        const lastLetterOfInputPoemVerseTwo = this.getLastIndexOfPoem(verseTwo)
+        const foundedPoemByVerseTwo = this.poemFounder(lastLetterOfInputPoemVerseTwo)
+        const foundedPoemByVerseOne = this.poemFounder(lastLetterOfInputPoemVerseOne)
+
+        if (foundedPoemByVerseTwo) {
+            result = foundedPoemByVerseTwo
+        } else if (foundedPoemByVerseOne) {
+            result = foundedPoemByVerseOne
+        } else {
+            result = null
+        }
+
+        return this.getTrim(result)
+    }
+
+    poemFounder(char) {
+        let foundedPoem
+
+        this.poems.forEach((poem) => {
+            const preparePoem = this.getTrim(poem)
+            const arrayOfLetters = this.convertStringToArray(preparePoem)
+            const firstLetterOfPoem = arrayOfLetters[0]
+
+            if (firstLetterOfPoem == char) {
+                foundedPoem = preparePoem
+            }
+        })
+
+        return foundedPoem
+    }
+
+    verseSeparator(verse) {
+        let versesObj = {}
+        const arrayOfVerse = verse.split("-")
+
+        versesObj.verseOne = this.getTrim(arrayOfVerse[0])
+        versesObj.verseTwo = this.getTrim(arrayOfVerse[1])
+
+        return versesObj
     }
 
     convertArrayToString(arr) {
@@ -58,6 +114,3 @@ class Poetry {
         return finalString
     }
 }
-
-const test = new Poetry()
-test.start("   دختری خرد، شکایت سر کرد - که مرا حادثه بی مادر کرد   ")
