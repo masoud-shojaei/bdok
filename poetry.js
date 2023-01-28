@@ -26,6 +26,13 @@ class Poetry {
 
 
 
+    getLastIndexOfPoem(poem) {
+        const preparePoet = this.getTrim(poem)
+        const arrayOfLettrs = this.convertStringToArray(preparePoet)
+        const lastLetterOfThePoem = arrayOfLettrs[arrayOfLettrs.length - 1]
+
+        return lastLetterOfThePoem
+    }
 
     getFirstIndexOfPoem(poem) {
         const preparePoet = this.getTrim(poem)
